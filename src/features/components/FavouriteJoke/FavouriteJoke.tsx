@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import StarDisplay from '../StarDisplay/StarDisplay';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Joke from '../Joke/Joke';
 
 const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
   return (
     <View style={styles.container}>
-      <Text>{joke.text}</Text>
+      <Joke text={joke.text} />
       <View style={styles.rowContainer}>
         <StarDisplay rating={joke.rating} />
         <TouchableOpacity onPress={() => removeJokeFromFavourites(joke.id)}>
-          <Icon name="heart" style={styles.heart} />
+          <Icon name="ios-heart-dislike" style={styles.heart} />
         </TouchableOpacity>
       </View>
     </View>

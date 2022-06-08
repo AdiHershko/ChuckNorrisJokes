@@ -5,13 +5,14 @@ import {Text, TouchableOpacity} from 'react-native';
 import JokeBrowser from './src/features/JokeBrowser/components/JokeBrowser/JokeBrowser';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Favourites from './src/features/Favourites/components/Favourites/Favourties';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createNativeStackNavigator();
 
 const renderFavouritesNavigationButton = (navigation: any) => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Favourites')}>
-      <Text>Favourites</Text>
+      <Icon name="heart" style={{fontSize: 20}} />
     </TouchableOpacity>
   );
 };
