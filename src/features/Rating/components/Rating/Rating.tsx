@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {IJoke} from '../../../../models/IJoke';
 import {storage} from '../../../../storage';
 import StarDisplay from '../../../../components/StarDisplay/StarDisplay';
+import BottomModal from '../../../../components/BottomModal/BottomModal';
+import RateJoke from '../RateJoke/RateJoke';
 
 const Rating = ({style = null, joke}) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -31,25 +33,15 @@ const Rating = ({style = null, joke}) => {
           <Icon name="heart" style={styles.heart} />
         </View>
       </TouchableOpacity>
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <BottomModal
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>
-        <View style={styles.modalContainer}>
-          <TouchableOpacity
-            style={styles.closeModal}
-            onPress={() => setIsModalVisible(false)}>
-            <Icon name="close" style={styles.close} />
-          </TouchableOpacity>
-          <Text style={styles.modalText}>How funny?</Text>
-          <StarDisplay
-            onPress={handleStarPress}
-            rating={rating}
-            enabled={true}
-          />
-        </View>
-      </Modal>
+        <RateJoke
+          setIsModalVisible={setIsModalVisible}
+          handleStarPress={handleStarPress}
+          rating={rating}
+        />
+      </BottomModal>
     </View>
   );
 };
@@ -64,26 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#aaaaaa',
   },
-  modalContainer: {
-    height: '30%',
-    marginTop: 'auto',
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 20,
-  },
-  closeModal: {
-    alignSelf: 'flex-end',
-  },
   heart: {
     fontSize: 16,
     color: 'red',
-  },
-  close: {
-    marginHorizontal: 15,
-    fontSize: 15,
   },
 });
 
