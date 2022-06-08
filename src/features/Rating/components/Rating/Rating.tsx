@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Modal} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IJoke} from '../../../../models/IJoke';
 import {storage} from '../../../../storage';
 import StarDisplay from '../../../../components/StarDisplay/StarDisplay';
 import BottomModal from '../../../../components/BottomModal/BottomModal';
 import RateJoke from '../RateJoke/RateJoke';
+import styles from './style';
 
 const Rating = ({style = null, joke}) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -45,21 +46,5 @@ const Rating = ({style = null, joke}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  rateButton: {
-    borderWidth: 2,
-    borderRadius: 100,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#aaaaaa',
-  },
-  heart: {
-    fontSize: 16,
-    color: 'red',
-  },
-});
 
 export default Rating;
