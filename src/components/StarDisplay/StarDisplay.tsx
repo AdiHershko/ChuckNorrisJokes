@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './style';
 
 const StarDisplay = ({onPress, rating, enabled}) => {
   return (
@@ -17,12 +18,5 @@ const StarDisplay = ({onPress, rating, enabled}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  star: {
-    fontSize: 24,
-    padding: 5,
-  },
-});
 
 export default StarDisplay;

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, Platform} from 'react-native';
+import styles from './style';
 
 const Joke = ({text}) => {
   return (
@@ -12,11 +13,5 @@ const Joke = ({text}) => {
     </Text>
   );
 };
-
-const styles = StyleSheet.create({
-  jokeText: {
-    fontSize: 20,
-  },
-});
 
 export default Joke;
