@@ -5,7 +5,7 @@ import styles from './style';
 
 const StarDisplay = ({onPress, rating, enabled}) => {
   return (
-    <View style={{marginTop: 20, flexDirection: 'row'}}>
+    <View style={styles.starsContainer}>
       {[1, 2, 3, 4, 5].map(num => (
         <TouchableOpacity disabled={!enabled} onPress={() => onPress(num)}>
           <Icon

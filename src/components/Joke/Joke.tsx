@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, Platform} from 'react-native';
+import {Text, Platform} from 'react-native';
 import styles from './style';
 
 const Joke = ({text}) => {
