@@ -12,6 +12,7 @@ import {storage} from '../../../../storage';
 import FavouriteJoke from '../../../../components/FavouriteJoke/FavouriteJoke';
 import {default as FAIcon} from 'react-native-vector-icons/FontAwesome';
 import {default as MCIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import BottomModal from '../../../../components/BottomModal/BottomModal';
 
 const Favourites = ({navigation}) => {
   const [favourites, setFavourites] = useState<IJoke[]>([]);
@@ -70,9 +71,7 @@ const Favourites = ({navigation}) => {
           <Text>There are no favourites!</Text>
         )}
       </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <BottomModal
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>
         <View style={styles.modalContainer}>
@@ -98,7 +97,7 @@ const Favourites = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </BottomModal>
     </View>
   );
 };
