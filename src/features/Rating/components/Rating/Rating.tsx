@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IJoke} from '../../../../models/IJoke';
 import {storage} from '../../../../storage';
-import StarDisplay from '../../../components/StarDisplay/StarDisplay';
+import StarDisplay from '../../../../components/StarDisplay/StarDisplay';
 
 const Rating = ({style = null, joke}) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);

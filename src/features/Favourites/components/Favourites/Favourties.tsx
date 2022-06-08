@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
 import {storage} from '../../../../storage';
-import FavouriteJoke from '../../../components/FavouriteJoke/FavouriteJoke';
+import FavouriteJoke from '../../../../components/FavouriteJoke/FavouriteJoke';
 import {default as FAIcon} from 'react-native-vector-icons/FontAwesome';
 import {default as MCIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
 

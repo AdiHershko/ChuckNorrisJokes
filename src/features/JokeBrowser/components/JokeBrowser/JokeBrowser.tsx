@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
-import Joke from '../../../components/Joke/Joke';
+import Joke from '../../../../components/Joke/Joke';
 import Rating from '../../../Rating/components/Rating/Rating';
 import {useFetchJoke} from '../../hooks/useFetchJoke';
 

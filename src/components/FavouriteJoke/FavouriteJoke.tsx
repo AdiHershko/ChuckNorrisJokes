@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import StarDisplay from '../StarDisplay/StarDisplay';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Joke from '../Joke/Joke';
