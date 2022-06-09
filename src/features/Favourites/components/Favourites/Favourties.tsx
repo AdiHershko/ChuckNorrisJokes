@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
 import FavouriteJoke from '../../../../components/FavouriteJoke/FavouriteJoke';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,9 +25,7 @@ const Favourites = ({navigation}) => {
 
   useEffect(() => {
     const favouriteJokes: IJoke[] = getFromStorage('favourites') as IJoke[];
-    if (favouriteJokes) {
-      setFavourites(favouriteJokes);
-    }
+    setFavourites(favouriteJokes ? favouriteJokes : []);
   }, []);
 
   useEffect(() => {
@@ -52,20 +50,27 @@ const Favourites = ({navigation}) => {
     }
   };
 
+  const renderFavouriteJokeItem = (item: IJoke) => {
+    return (
+      <FavouriteJoke
+        joke={item}
+        removeJokeFromFavourites={removeJokeFromFavourites}
+      />
+    );
+  };
+
+  const renderEmptyFavourites = () => {
+    return <Text>There are no favourites!</Text>;
+  };
+
   return (
     <View>
-      <ScrollView>
-        {favourites.length > 0 ? (
-          favourites.map(val => (
-            <FavouriteJoke
-              joke={val}
-              removeJokeFromFavourites={removeJokeFromFavourites}
-            />
-          ))
-        ) : (
-          <Text>There are no favourites!</Text>
-        )}
-      </ScrollView>
+      <FlatList
+        data={favourites}
+        renderItem={({item}) => renderFavouriteJokeItem(item)}
+        keyExtractor={item => item.id}
+        ListEmptyComponent={renderEmptyFavourites}
+      />
       <BottomModal
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>

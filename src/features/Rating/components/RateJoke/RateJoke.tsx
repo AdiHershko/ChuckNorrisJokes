@@ -13,7 +13,12 @@ const RateJoke = ({setIsModalVisible, handleStarPress, rating}) => {
         <Icon name="close" style={styles.close} />
       </TouchableOpacity>
       <Text style={styles.modalText}>How funny?</Text>
-      <StarDisplay onPress={handleStarPress} rating={rating} enabled={true} />
+      <StarDisplay
+        onPress={handleStarPress}
+        rating={rating}
+        enabled={true}
+        listContainerStyle={{flex: 1, justifyContent: 'center'}}
+      />
     </View>
   );
 };
