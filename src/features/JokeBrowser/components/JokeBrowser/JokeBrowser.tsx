@@ -30,9 +30,9 @@ const JokeBrowser = () => {
         <Text>Next Joke</Text>
       </TouchableOpacity>
       <View style={styles.ratingContainer}>
-        {currentJoke ? (
+        {currentJoke && (
           <Rating style={{marginBottom: 40}} joke={currentJoke} />
-        ) : null}
+        )}
       </View>
     </View>
   );

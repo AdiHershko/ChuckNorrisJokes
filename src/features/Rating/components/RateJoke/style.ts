@@ -5,18 +5,19 @@ const styles = StyleSheet.create({
     height: '30%',
     marginTop: 'auto',
     backgroundColor: '#ffffff',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   modalText: {
+    marginTop: 40,
     fontSize: 20,
   },
   closeModal: {
     alignSelf: 'flex-end',
   },
   close: {
-    marginHorizontal: 15,
-    fontSize: 15,
+    marginHorizontal: 10,
+    fontSize: 20,
+    padding: 10,
   },
 });
 
