@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
-import {storage} from '../../../../storage';
 import FavouriteJoke from '../../../../components/FavouriteJoke/FavouriteJoke';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomModal from '../../../../components/BottomModal/BottomModal';
 import SortJokes from '../SortJokes/SortJokes';
 import styles from './style';
+import useStorage from '../../../../hooks/useStorage';
 
 const Favourites = ({navigation}) => {
   const [favourites, setFavourites] = useState<IJoke[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const {saveToStorage, getFromStorage} = useStorage();
 
   useEffect(() => {
     navigation.setOptions({
@@ -23,14 +24,14 @@ const Favourites = ({navigation}) => {
   }, [navigation]);
 
   useEffect(() => {
-    const favouriteJokesStr: string = storage.getString('favourites') as string;
-    if (favouriteJokesStr) {
-      setFavourites(JSON.parse(favouriteJokesStr) as IJoke[]);
+    const favouriteJokes: IJoke[] = getFromStorage('favourites') as IJoke[];
+    if (favouriteJokes) {
+      setFavourites(favouriteJokes);
     }
   }, []);
 
   useEffect(() => {
-    storage.set('favourites', JSON.stringify(favourites));
+    saveToStorage('favourites', favourites);
   }, [favourites]);
 
   const removeJokeFromFavourites = (id: string) => {
