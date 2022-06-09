@@ -15,6 +15,7 @@ const Favourites = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
+      headerBackTitle: '',
       headerRight: () => (
         <TouchableOpacity onPress={() => setIsModalVisible(true)}>
           <Icon name="sort" style={styles.sort} />

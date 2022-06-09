@@ -17,8 +17,6 @@ const renderFavouritesNavigationButton = (navigation: any) => {
   );
 };
 
-//TODO: add index.tsx to each component
-
 const App = () => {
   return (
     <NavigationContainer>
