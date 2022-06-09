@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 import JokeBrowser from './src/features/JokeBrowser/components/JokeBrowser/JokeBrowser';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -16,6 +16,8 @@ const renderFavouritesNavigationButton = (navigation: any) => {
     </TouchableOpacity>
   );
 };
+
+//TODO: add index.tsx to each component
 
 const App = () => {
   return (

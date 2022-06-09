@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
 import Joke from '../../../../components/Joke/Joke';
 import Rating from '../../../Rating/components/Rating/Rating';
@@ -24,7 +24,7 @@ const JokeBrowser = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.jokeContainer}>
-        <Joke text={currentJoke ? currentJoke.text : ''} />
+        <Joke text={currentJoke ? currentJoke.text : ''} animated={true} />
       </ScrollView>
       <TouchableOpacity onPress={generateJoke} style={styles.button}>
         <Text>Next Joke</Text>
