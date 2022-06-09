@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
-import FavouriteJoke from '../../../../components/FavouriteJoke/FavouriteJoke';
+import FavouriteJoke from '../../../../components/FavouriteJoke';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import BottomModal from '../../../../components/BottomModal/BottomModal';
-import SortJokes from '../SortJokes/SortJokes';
+import BottomModal from '../../../../components/BottomModal';
+import SortJokes from '../SortJokes';
 import styles from './style';
 import useStorage from '../../../../hooks/useStorage';
 

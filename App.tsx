@@ -2,9 +2,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native';
 
-import JokeBrowser from './src/features/JokeBrowser/components/JokeBrowser/JokeBrowser';
+import JokeBrowser from './src/features/JokeBrowser/components/JokeBrowser';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Favourites from './src/features/Favourites/components/Favourites/Favourties';
+import Favourites from './src/features/Favourites/components/Favourites';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createNativeStackNavigator();

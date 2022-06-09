@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IJoke} from '../../../../models/IJoke';
-import BottomModal from '../../../../components/BottomModal/BottomModal';
-import RateJoke from '../RateJoke/RateJoke';
+import BottomModal from '../../../../components/BottomModal';
+import RateJoke from '../RateJoke';
 import styles from './style';
 import useStorage from '../../../../hooks/useStorage';
 

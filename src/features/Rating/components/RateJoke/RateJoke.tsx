@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import StarDisplay from '../../../../components/StarDisplay/StarDisplay';
+import StarDisplay from '../../../../components/StarDisplay';
 import styles from './style';
 
 const RateJoke = ({setIsModalVisible, handleStarPress, rating}) => (

@@ -1,8 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import StarDisplay from '../StarDisplay/StarDisplay';
+import StarDisplay from '../StarDisplay';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Joke from '../Joke/Joke';
+import Joke from '../Joke';
 import styles from './style';
 
 const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
