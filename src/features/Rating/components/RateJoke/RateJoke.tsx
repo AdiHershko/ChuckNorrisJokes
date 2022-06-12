@@ -5,7 +5,7 @@ import StarDisplay from '../../../../components/StarDisplay';
 import styles from './style';
 
 const RateJoke = ({setIsModalVisible, handleStarPress, rating}) => (
-  <View style={styles.modalContainer}>
+  <View style={styles.container}>
     <TouchableOpacity
       style={styles.closeModal}
       onPress={() => setIsModalVisible(false)}>

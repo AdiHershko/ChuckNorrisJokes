@@ -1,10 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    height: '30%',
-    marginTop: 'auto',
-    backgroundColor: '#ffffff',
+  container: {
     alignItems: 'center',
   },
   modalText: {

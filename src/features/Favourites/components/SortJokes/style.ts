@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   },
   close: {
     fontSize: 20,
+    marginHorizontal: 8,
   },
   sortOption: {
     borderBottomWidth: 1,

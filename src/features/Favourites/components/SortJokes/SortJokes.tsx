@@ -5,7 +5,7 @@ import styles from './style';
 
 const SortJokes = ({setIsModalVisible, sortJokes}) => {
   return (
-    <View style={styles.modalContainer}>
+    <View>
       <View style={styles.closeModalContainer}>
         <TouchableOpacity onPress={() => setIsModalVisible(false)}>
           <Icon name="close" style={styles.close} />
