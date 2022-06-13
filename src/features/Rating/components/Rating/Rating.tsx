@@ -7,10 +7,13 @@ import RateJoke from '../RateJoke';
 import styles from './style';
 import useStorage from '../../../../hooks/useStorage';
 
-const Rating = ({style = null, joke}) => {
+const Rating = ({containerStyle = null, joke, setJokeRating}) => {
+  //TODO: extract all favourites actions into outside service/custom hook to keep component clear.
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
+
   const {getFromStorage, saveToStorage, containsKey} = useStorage();
+
   useEffect(() => {
     setRating(joke.rating);
   }, [joke]);
@@ -21,14 +24,13 @@ const Rating = ({style = null, joke}) => {
 
   const handleStarPress = (num: number) => {
     setRating(num);
-    joke.rating = num;
     const otherFavourites = favourites.filter(val => val.id !== joke.id);
-    saveToStorage('favourites', [...otherFavourites, joke]);
+    saveToStorage('favourites', [...otherFavourites, {...joke, rating: num}]);
     setIsModalVisible(false);
   };
 
   return (
-    <View style={style}>
+    <View style={containerStyle}>
       <TouchableOpacity onPress={() => setIsModalVisible(true)}>
         <View style={styles.rateButton}>
           <Icon name="heart" style={styles.heart} />
@@ -38,7 +40,7 @@ const Rating = ({style = null, joke}) => {
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>
         <RateJoke
-          setIsModalVisible={setIsModalVisible}
+          close={() => setIsModalVisible(false)}
           handleStarPress={handleStarPress}
           rating={rating}
         />

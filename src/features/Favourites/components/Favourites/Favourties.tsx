@@ -40,6 +40,7 @@ const Favourites = ({navigation}) => {
 
   const sortJokes = (method: string) => {
     switch (method) {
+      //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
       case 'topFirst':
         setFavourites([...favourites.sort((a, b) => b.rating - a.rating)]);
         break;
@@ -76,7 +77,7 @@ const Favourites = ({navigation}) => {
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(false)}>
         <SortJokes
-          setIsModalVisible={setIsModalVisible}
+          close={() => setIsModalVisible(false)}
           sortJokes={sortJokes}
         />
       </BottomModal>

@@ -1,21 +1,16 @@
-import {storage} from '../storage';
+import {set, get, contains} from '../services/storageService';
 
 const useStorage = () => {
   const saveToStorage = (key: string, val: any) => {
-    const stringValue = JSON.stringify(val);
-    storage.set(key, stringValue);
+    set(key, val);
   };
 
   const getFromStorage = (key: string): any => {
-    const value = storage.getString(key);
-    if (!value) {
-      return null;
-    }
-    return JSON.parse(value);
+    return get(key);
   };
 
   const containsKey = (key: string): boolean => {
-    return storage.contains(key);
+    return contains(key);
   };
   return {
     saveToStorage,

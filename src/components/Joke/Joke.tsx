@@ -2,7 +2,12 @@ import React, {useEffect, useRef} from 'react';
 import {Text, Platform, Animated} from 'react-native';
 import styles from './style';
 
-const Joke = ({text, animated}) => {
+interface Joke_I {
+  text: string;
+  animated: boolean;
+}
+
+const Joke = ({text, animated}: Joke_I) => {
   const animValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -19,6 +24,7 @@ const Joke = ({text, animated}) => {
       <Text
         style={[
           styles.jokeText,
+          //TODO: use platform.select in styles file
           {fontFamily: Platform.OS === 'ios' ? 'Courier New' : 'monospace'},
         ]}>
         {text}

@@ -3,11 +3,11 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './style';
 
-const SortJokes = ({setIsModalVisible, sortJokes}) => {
+const SortJokes = ({close, sortJokes}) => {
   return (
     <View>
       <View style={styles.closeModalContainer}>
-        <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+        <TouchableOpacity onPress={() => close()}>
           <Icon name="close" style={styles.close} />
         </TouchableOpacity>
       </View>

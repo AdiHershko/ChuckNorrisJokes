@@ -9,17 +9,19 @@ import styles from './style';
 const JokeBrowser = () => {
   const [currentJoke, setCurrentJoke] = useState<IJoke>();
 
-  const {fetchJoke} = useFetchJoke();
-  useEffect(() => {
-    fetchJoke().then((joke: IJoke) => {
-      setCurrentJoke(joke);
-    });
-  }, []);
+  const {fetchJoke, cancelJokeRequest} = useFetchJoke();
 
   const generateJoke = async () => {
     const joke = await fetchJoke();
-    setCurrentJoke(joke);
+    if (joke) {
+      setCurrentJoke(joke);
+    }
   };
+
+  useEffect(() => {
+    generateJoke();
+    return () => cancelJokeRequest();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -31,7 +33,7 @@ const JokeBrowser = () => {
       </TouchableOpacity>
       <View style={styles.ratingContainer}>
         {currentJoke && (
-          <Rating style={{marginBottom: 40}} joke={currentJoke} />
+          <Rating containerStyle={{marginBottom: 40}} joke={currentJoke} />
         )}
       </View>
     </View>

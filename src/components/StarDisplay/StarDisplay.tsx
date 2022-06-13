@@ -2,9 +2,9 @@ import React from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './style';
+import starRatings from '../../constants/starRatings';
 
 const StarDisplay = ({onPress, rating, enabled, listContainerStyle}) => {
-  const ratings = [1, 2, 3, 4, 5];
 
   const renderStarItem = (item: number) => {
     return (
@@ -22,7 +22,7 @@ const StarDisplay = ({onPress, rating, enabled, listContainerStyle}) => {
     <View style={styles.starsContainer}>
       <FlatList
         horizontal={true}
-        data={ratings}
+        data={starRatings}
         renderItem={({item}) => renderStarItem(item)}
         keyExtractor={item => item.toString()}
         contentContainerStyle={listContainerStyle}
