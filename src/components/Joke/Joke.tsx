@@ -21,14 +21,7 @@ const Joke = ({text, animated}: Joke_I) => {
 
   return (
     <Animated.View style={animated && {transform: [{scale: animValue}]}}>
-      <Text
-        style={[
-          styles.jokeText,
-          //TODO: use platform.select in styles file
-          {fontFamily: Platform.OS === 'ios' ? 'Courier New' : 'monospace'},
-        ]}>
-        {text}
-      </Text>
+      <Text style={styles.jokeText}>{text}</Text>
     </Animated.View>
   );
 };
