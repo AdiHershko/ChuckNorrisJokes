@@ -6,26 +6,22 @@ import BottomModal from '../../../../components/BottomModal';
 import RateJoke from '../RateJoke';
 import styles from './style';
 import useStorage from '../../../../hooks/useStorage';
+import useFavouriteJokes from '../../../../hooks/useFavouriteJokes';
 
 const Rating = ({containerStyle = null, joke, setJokeRating}) => {
   //TODO: extract all favourites actions into outside service/custom hook to keep component clear.
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
 
-  const {getFromStorage, saveToStorage, containsKey} = useStorage();
+  const {saveFavouriteJoke} = useFavouriteJokes();
 
   useEffect(() => {
     setRating(joke.rating);
   }, [joke]);
 
-  const favourites: IJoke[] = containsKey('favourites')
-    ? (getFromStorage('favourites') as IJoke[])
-    : [];
-
   const handleStarPress = (num: number) => {
     setRating(num);
-    const otherFavourites = favourites.filter(val => val.id !== joke.id);
-    saveToStorage('favourites', [...otherFavourites, {...joke, rating: num}]);
+    saveFavouriteJoke(joke, num);
     setIsModalVisible(false);
   };
 

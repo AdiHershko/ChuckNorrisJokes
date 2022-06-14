@@ -7,11 +7,12 @@ import BottomModal from '../../../../components/BottomModal';
 import SortJokes from '../SortJokes';
 import styles from './style';
 import useStorage from '../../../../hooks/useStorage';
+import useFavouriteJokes from '../../../../hooks/useFavouriteJokes';
 
 const Favourites = ({navigation}) => {
-  const [favourites, setFavourites] = useState<IJoke[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const {saveToStorage, getFromStorage} = useStorage();
+  const {favouriteJokes, removeFavouriteJoke} = useFavouriteJokes();
+  const {sortedJokes, setSortedJokes} = useState<IJoke[]>([]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -24,28 +25,19 @@ const Favourites = ({navigation}) => {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    const favouriteJokes: IJoke[] = getFromStorage('favourites') as IJoke[];
-    setFavourites(favouriteJokes ? favouriteJokes : []);
-  }, []);
+  // useEffect(() => {
+  //   setSortedJokes([...favouriteJokes]);
+  // }, []);
 
-  useEffect(() => {
-    saveToStorage('favourites', favourites);
-  }, [favourites]);
-
-  const removeJokeFromFavourites = (id: string) => {
-    const filteredFavourites = favourites.filter(joke => joke.id !== id);
-    setFavourites([...filteredFavourites]);
-  };
 
   const sortJokes = (method: string) => {
     switch (method) {
       //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
       case 'topFirst':
-        setFavourites([...favourites.sort((a, b) => b.rating - a.rating)]);
+        setSortedJokes([...favouriteJokes.sort((a, b) => b.rating - a.rating)]);
         break;
       case 'bottomFirst':
-        setFavourites([...favourites.sort((a, b) => a.rating - b.rating)]);
+        setSortedJokes([...favouriteJokes.sort((a, b) => a.rating - b.rating)]);
         break;
       default:
         break;
@@ -56,7 +48,7 @@ const Favourites = ({navigation}) => {
     return (
       <FavouriteJoke
         joke={item}
-        removeJokeFromFavourites={removeJokeFromFavourites}
+        removeJokeFromFavourites={() => removeFavouriteJoke(item)}
       />
     );
   };
@@ -68,7 +60,7 @@ const Favourites = ({navigation}) => {
   return (
     <View>
       <FlatList
-        data={favourites}
+        data={favouriteJokes}
         renderItem={({item}) => renderFavouriteJokeItem(item)}
         keyExtractor={item => item.id}
         ListEmptyComponent={renderEmptyFavourites}

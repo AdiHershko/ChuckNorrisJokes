@@ -14,18 +14,27 @@ const useFavouriteJokes = () => {
     setFavouriteJokes([...favourites]);
   }, []);
 
+  useEffect(() => {
+    saveToStorage('favourites', favouriteJokes);
+  }, [favouriteJokes]);
+
   const saveFavouriteJoke = (joke: IJoke, rating: number) => {
     const otherFavourites: IJoke[] = favouriteJokes.filter(
       val => val.id !== joke.id,
     );
     const favourites = [...otherFavourites, {...joke, rating}];
-    saveToStorage('favourites', favourites);
+    setFavouriteJokes([...favourites]);
+  };
+
+  const removeFavouriteJoke = (joke: IJoke) => {
+    const favourites = favouriteJokes.filter(val => val.id !== joke.id);
     setFavouriteJokes([...favourites]);
   };
 
   return {
     favouriteJokes,
     saveFavouriteJoke,
+    removeFavouriteJoke,
   };
 };
 
