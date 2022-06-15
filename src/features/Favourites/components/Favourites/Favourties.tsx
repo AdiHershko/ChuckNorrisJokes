@@ -8,10 +8,14 @@ import SortJokes from '../SortJokes';
 import styles from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeFromFavourites} from '../../../../actions/favouritesActions';
+import { RootState } from '../../../../reducers/rootReducer';
 
 const Favourites = ({navigation}) => {
+  const [sortedJokes, setSortedJokes] = useState<IJoke[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const favourites = useSelector(state => state.favouritesState.favourites);
+  const favourites = useSelector<RootState, IJoke[]>(
+    state => state.favouritesState.favourites,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,23 +29,27 @@ const Favourites = ({navigation}) => {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    setSortedJokes([...favourites]);
+  }, [favourites]);
+
   const removeJokeFromFavourites = (joke: IJoke) => {
     dispatch(removeFromFavourites(joke));
   };
 
-  // const sortJokes = (method: string) => {
-  //   switch (method) {
-  //     //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
-  //     case 'topFirst':
-  //       setFavourites([...favourites.sort((a, b) => b.rating - a.rating)]);
-  //       break;
-  //     case 'bottomFirst':
-  //       setFavourites([...favourites.sort((a, b) => a.rating - b.rating)]);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
+  const sortJokes = (method: string) => {
+    switch (method) {
+      //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
+      case 'topFirst':
+        setSortedJokes([...favourites.sort((a, b) => b.rating - a.rating)]);
+        break;
+      case 'bottomFirst':
+        setSortedJokes([...favourites.sort((a, b) => a.rating - b.rating)]);
+        break;
+      default:
+        break;
+    }
+  };
 
   const renderFavouriteJokeItem = (item: IJoke) => {
     return (
@@ -59,7 +67,7 @@ const Favourites = ({navigation}) => {
   return (
     <View>
       <FlatList
-        data={favourites}
+        data={sortedJokes}
         renderItem={({item}) => renderFavouriteJokeItem(item)}
         keyExtractor={item => item.id}
         ListEmptyComponent={renderEmptyFavourites}
@@ -69,7 +77,7 @@ const Favourites = ({navigation}) => {
         onRequestClose={() => setIsModalVisible(false)}>
         <SortJokes
           close={() => setIsModalVisible(false)}
-          sortJokes={() => {}}
+          sortJokes={sortJokes}
         />
       </BottomModal>
     </View>
