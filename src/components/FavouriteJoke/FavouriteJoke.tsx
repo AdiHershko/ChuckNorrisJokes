@@ -11,7 +11,7 @@ const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
       <Joke text={joke.text} />
       <View style={styles.rowContainer}>
         <StarDisplay rating={joke.rating} />
-        <TouchableOpacity onPress={() => removeJokeFromFavourites(joke.id)}>
+        <TouchableOpacity onPress={() => removeJokeFromFavourites(joke)}>
           <Icon name="ios-heart-dislike" style={styles.heart} />
         </TouchableOpacity>
       </View>
