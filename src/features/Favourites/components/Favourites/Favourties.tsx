@@ -6,14 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomModal from '../../../../components/BottomModal';
 import SortJokes from '../SortJokes';
 import styles from './style';
-import useStorage from '../../../../hooks/useStorage';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeFromFavourites } from '../../../../actions/favouritesActions';
+import {useDispatch, useSelector} from 'react-redux';
+import {removeFromFavourites} from '../../../../actions/favouritesActions';
 
 const Favourites = ({navigation}) => {
-  // const [favourites, setFavourites] = useState<IJoke[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const {saveToStorage, getFromStorage} = useStorage();
   const favourites = useSelector(state => state.favouritesState.favourites);
   const dispatch = useDispatch();
 
@@ -28,18 +25,7 @@ const Favourites = ({navigation}) => {
     });
   }, [navigation]);
 
-  // useEffect(() => {
-  //   const favouriteJokes: IJoke[] = getFromStorage('favourites') as IJoke[];
-  //   setFavourites(favouriteJokes ? favouriteJokes : []);
-  // }, []);
-
-  // useEffect(() => {
-  //   saveToStorage('favourites', favourites);
-  // }, [favourites]);
-
   const removeJokeFromFavourites = (joke: IJoke) => {
-    // const filteredFavourites = favourites.filter(joke => joke.id !== id);
-    // setFavourites([...filteredFavourites]);
     dispatch(removeFromFavourites(joke));
   };
 
