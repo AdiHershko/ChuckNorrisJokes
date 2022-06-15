@@ -8,7 +8,8 @@ import SortJokes from '../SortJokes';
 import styles from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeFromFavourites} from '../../../../actions/favouritesActions';
-import { RootState } from '../../../../reducers/rootReducer';
+import {RootState} from '../../../../reducers/rootReducer';
+import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
 
 const Favourites = ({navigation}) => {
   const [sortedJokes, setSortedJokes] = useState<IJoke[]>([]);
@@ -16,6 +17,10 @@ const Favourites = ({navigation}) => {
   const favourites = useSelector<RootState, IJoke[]>(
     state => state.favouritesState.favourites,
   );
+  const sortingType = useSelector<RootState, SORTING_TYPE>(
+    state => state.sortingTypeState.sortingType,
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,21 +38,29 @@ const Favourites = ({navigation}) => {
     setSortedJokes([...favourites]);
   }, [favourites]);
 
+  useEffect(() => {
+    sortJokes(sortingType);
+  }, [sortingType]);
+
   const removeJokeFromFavourites = (joke: IJoke) => {
     dispatch(removeFromFavourites(joke));
   };
 
-  const sortJokes = (method: string) => {
+  const sortJokes = (method: SORTING_TYPE) => {
     switch (method) {
-      case 'topFirst':
+      case SORTING_TYPE.TOP_TO_BOTTOM:
         setSortedJokes([...favourites.sort((a, b) => b.rating - a.rating)]);
         break;
-      case 'bottomFirst':
+      case SORTING_TYPE.BOTTOM_TO_TOP:
         setSortedJokes([...favourites.sort((a, b) => a.rating - b.rating)]);
         break;
       default:
         break;
     }
+  };
+
+  const sortFavourites = (method: SORTING_TYPE) => {
+    dispatch(changeSortingType(method));
   };
 
   const renderFavouriteJokeItem = (item: IJoke) => {
@@ -76,7 +89,7 @@ const Favourites = ({navigation}) => {
         onRequestClose={() => setIsModalVisible(false)}>
         <SortJokes
           close={() => setIsModalVisible(false)}
-          sortJokes={sortJokes}
+          sortJokes={sortFavourites}
         />
       </BottomModal>
     </View>

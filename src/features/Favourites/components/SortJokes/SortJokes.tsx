@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { SORTING_TYPE } from '../../../../actions/sortActions';
 import styles from './style';
 
 const SortJokes = ({close, sortJokes}) => {
@@ -18,12 +19,12 @@ const SortJokes = ({close, sortJokes}) => {
         <View style={{borderBottomWidth: 1}}></View>
         <TouchableOpacity
           style={styles.sortOption}
-          onPress={() => sortJokes('topFirst')}>
+          onPress={() => sortJokes(SORTING_TYPE.TOP_TO_BOTTOM)}>
           <Text style={styles.sortOptionText}>Funny - Top to Bottom</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.sortOption}
-          onPress={() => sortJokes('bottomFirst')}>
+          onPress={() => sortJokes(SORTING_TYPE.BOTTOM_TO_TOP)}>
           <Text style={styles.sortOptionText}>Funny - Bottom to Top</Text>
         </TouchableOpacity>
       </View>
