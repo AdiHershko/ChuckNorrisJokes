@@ -8,7 +8,7 @@ const SortJokes = ({close, sortJokes}) => {
   return (
     <View>
       <View style={styles.closeModalContainer}>
-        <TouchableOpacity onPress={() => close()}>
+        <TouchableOpacity onPress={close}>
           <Icon name="close" style={styles.close} />
         </TouchableOpacity>
       </View>
