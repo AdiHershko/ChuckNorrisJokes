@@ -8,10 +8,8 @@ import {useDispatch} from 'react-redux';
 import {addToFavourites} from '../../../../actions/favouritesActions';
 
 const Rating = ({containerStyle = null, joke}) => {
-  //TODO: extract all favourites actions into outside service/custom hook to keep component clear.
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
