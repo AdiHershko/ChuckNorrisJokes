@@ -6,12 +6,22 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomModal from '../../../../components/BottomModal';
 import SortJokes from '../SortJokes';
 import styles from './style';
-import useStorage from '../../../../hooks/useStorage';
+import {useDispatch, useSelector} from 'react-redux';
+import {removeFromFavourites} from '../../../../actions/favouritesActions';
+import {RootState} from '../../../../reducers/rootReducer';
+import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
 
 const Favourites = ({navigation}) => {
-  const [favourites, setFavourites] = useState<IJoke[]>([]);
+  const [sortedJokes, setSortedJokes] = useState<IJoke[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const {saveToStorage, getFromStorage} = useStorage();
+  const favourites = useSelector<RootState, IJoke[]>(
+    state => state.favouritesState.favourites,
+  );
+  const sortingType = useSelector<RootState, SORTING_TYPE>(
+    state => state.sortingTypeState.sortingType,
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     navigation.setOptions({
@@ -25,31 +35,32 @@ const Favourites = ({navigation}) => {
   }, [navigation]);
 
   useEffect(() => {
-    const favouriteJokes: IJoke[] = getFromStorage('favourites') as IJoke[];
-    setFavourites(favouriteJokes ? favouriteJokes : []);
-  }, []);
-
-  useEffect(() => {
-    saveToStorage('favourites', favourites);
+    setSortedJokes([...favourites]);
   }, [favourites]);
 
-  const removeJokeFromFavourites = (id: string) => {
-    const filteredFavourites = favourites.filter(joke => joke.id !== id);
-    setFavourites([...filteredFavourites]);
+  useEffect(() => {
+    sortJokes(sortingType);
+  }, [sortingType]);
+
+  const removeJokeFromFavourites = (joke: IJoke) => {
+    dispatch(removeFromFavourites(joke));
   };
 
-  const sortJokes = (method: string) => {
+  const sortJokes = (method: SORTING_TYPE) => {
     switch (method) {
-      //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
-      case 'topFirst':
-        setFavourites([...favourites.sort((a, b) => b.rating - a.rating)]);
+      case SORTING_TYPE.TOP_TO_BOTTOM:
+        setSortedJokes([...favourites.sort((a, b) => b.rating - a.rating)]);
         break;
-      case 'bottomFirst':
-        setFavourites([...favourites.sort((a, b) => a.rating - b.rating)]);
+      case SORTING_TYPE.BOTTOM_TO_TOP:
+        setSortedJokes([...favourites.sort((a, b) => a.rating - b.rating)]);
         break;
       default:
         break;
     }
+  };
+
+  const sortFavourites = (method: SORTING_TYPE) => {
+    dispatch(changeSortingType(method));
   };
 
   const renderFavouriteJokeItem = (item: IJoke) => {
@@ -68,7 +79,7 @@ const Favourites = ({navigation}) => {
   return (
     <View>
       <FlatList
-        data={favourites}
+        data={sortedJokes}
         renderItem={({item}) => renderFavouriteJokeItem(item)}
         keyExtractor={item => item.id}
         ListEmptyComponent={renderEmptyFavourites}
@@ -78,7 +89,7 @@ const Favourites = ({navigation}) => {
         onRequestClose={() => setIsModalVisible(false)}>
         <SortJokes
           close={() => setIsModalVisible(false)}
-          sortJokes={sortJokes}
+          sortJokes={sortFavourites}
         />
       </BottomModal>
     </View>
