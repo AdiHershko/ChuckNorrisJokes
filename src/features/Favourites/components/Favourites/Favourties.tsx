@@ -39,7 +39,6 @@ const Favourites = ({navigation}) => {
 
   const sortJokes = (method: string) => {
     switch (method) {
-      //TODO: this triggers unnecessary saves to storage, maybe add sotredJokes property
       case 'topFirst':
         setSortedJokes([...favourites.sort((a, b) => b.rating - a.rating)]);
         break;

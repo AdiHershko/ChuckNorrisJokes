@@ -1,7 +1,7 @@
 import {IJoke} from '../models/IJoke';
 import {
-  Action,
   ADD_TO_FAVOURITES,
+  FavouriteJokeAction,
   REMOVE_FROM_FAVOURITES,
 } from '../actions/favouritesActions';
 
@@ -15,7 +15,7 @@ const initialState: FavouritesState = {
 
 const favouritesReducer = (
   state: FavouritesState = initialState,
-  action: Action,
+  action: FavouriteJokeAction,
 ) => {
   switch (action.type) {
     case ADD_TO_FAVOURITES:

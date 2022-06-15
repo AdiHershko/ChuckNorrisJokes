@@ -3,9 +3,9 @@ import {IJoke} from '../models/IJoke';
 export const ADD_TO_FAVOURITES = 'ADD_TO_FAVOURITES';
 export const REMOVE_FROM_FAVOURITES = 'REMOVE_FROM_FAVOURITES';
 
-export interface Action {
+export interface FavouriteJokeAction {
   type: string;
-  payload?: any;
+  payload: IJoke;
 }
 
 export const addToFavourites = (joke: IJoke) => {
