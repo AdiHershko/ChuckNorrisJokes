@@ -19,9 +19,12 @@ const favouritesReducer = (
 ) => {
   switch (action.type) {
     case ADD_TO_FAVOURITES:
+      const otherFavourites = state.favourites.filter(
+        joke => joke.id !== action.payload.id,
+      );
       return {
         ...state,
-        favourites: [...state.favourites, action.payload],
+        favourites: [...otherFavourites, action.payload],
       };
     case REMOVE_FROM_FAVOURITES:
       const favourites = state.favourites.filter(
