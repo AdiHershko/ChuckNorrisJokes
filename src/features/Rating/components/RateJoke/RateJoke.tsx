@@ -6,7 +6,7 @@ import styles from './style';
 
 const RateJoke = ({close, handleStarPress, rating}) => (
   <View style={styles.container}>
-    <TouchableOpacity style={styles.closeModal} onPress={() => close()}>
+    <TouchableOpacity style={styles.closeModal} onPress={close}>
       <Icon name="close" style={styles.close} />
     </TouchableOpacity>
     <Text style={styles.modalText}>How funny?</Text>

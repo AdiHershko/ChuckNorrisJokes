@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {IJoke} from '../../../../models/IJoke';
 import FavouriteJoke from '../../../../components/FavouriteJoke';
@@ -10,10 +10,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {removeFromFavourites} from '../../../../actions/favouritesActions';
 import {RootState} from '../../../../reducers/rootReducer';
 import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
+import {ModalContext} from '../../../../context/ModalContext';
 
 const Favourites = ({navigation}) => {
   const [sortedJokes, setSortedJokes] = useState<IJoke[]>([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const favourites = useSelector<RootState, IJoke[]>(
     state => state.favouritesState.favourites,
   );
@@ -23,11 +23,13 @@ const Favourites = ({navigation}) => {
 
   const dispatch = useDispatch();
 
+  const {sortJokesModalOpen, setSortJokesModalOpen} = useContext(ModalContext);
+
   useEffect(() => {
     navigation.setOptions({
       headerBackTitle: '',
       headerRight: () => (
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+        <TouchableOpacity onPress={() => setSortJokesModalOpen(true)}>
           <Icon name="sort" style={styles.sort} />
         </TouchableOpacity>
       ),
@@ -85,10 +87,10 @@ const Favourites = ({navigation}) => {
         ListEmptyComponent={renderEmptyFavourites}
       />
       <BottomModal
-        visible={isModalVisible}
-        onRequestClose={() => setIsModalVisible(false)}>
+        visible={sortJokesModalOpen}
+        onRequestClose={() => setSortJokesModalOpen(false)}>
         <SortJokes
-          close={() => setIsModalVisible(false)}
+          close={() => setSortJokesModalOpen(false)}
           sortJokes={sortFavourites}
         />
       </BottomModal>
