@@ -4,6 +4,7 @@ import StarDisplay from '../StarDisplay';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Joke from '../Joke';
 import styles from './style';
+import { applyAppiumLabel } from '../../services/appiumService';
 
 const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
   return (
@@ -11,7 +12,9 @@ const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
       <Joke text={joke.text} />
       <View style={styles.rowContainer}>
         <StarDisplay rating={joke.rating} />
-        <TouchableOpacity onPress={() => removeJokeFromFavourites(joke)}>
+        <TouchableOpacity
+          onPress={() => removeJokeFromFavourites(joke)}
+          {...applyAppiumLabel('remove-button')}>
           <Icon name="ios-heart-dislike" style={styles.heart} />
         </TouchableOpacity>
       </View>
