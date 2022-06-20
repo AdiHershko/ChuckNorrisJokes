@@ -5,6 +5,7 @@ import {IJoke} from '../../models/IJoke';
 
 jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
 jest.mock('react-native-vector-icons/Ionicons', () => 'icon');
+jest.useFakeTimers();
 
 const mockJoke: IJoke = {
   text: 'Test_Joke',
