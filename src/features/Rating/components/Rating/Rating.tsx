@@ -7,8 +7,14 @@ import styles from './style';
 import {useDispatch} from 'react-redux';
 import {addToFavourites} from '../../../../actions/favouritesActions';
 import {ModalContext} from '../../../../context/ModalContext';
+import {IJoke} from '../../../../models/IJoke';
 
-const Rating = ({containerStyle = null, joke}) => {
+export interface Rating_I {
+  containerStyle: any;
+  joke: IJoke;
+}
+
+const Rating = ({containerStyle, joke}: Rating_I) => {
   const [rating, setRating] = useState<number>(0);
   const dispatch = useDispatch();
 
