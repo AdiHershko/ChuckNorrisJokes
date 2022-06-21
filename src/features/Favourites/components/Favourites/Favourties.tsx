@@ -11,6 +11,7 @@ import {removeFromFavourites} from '../../../../actions/favouritesActions';
 import {RootState} from '../../../../reducers/rootReducer';
 import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
 import {ModalContext} from '../../../../context/ModalContext';
+import { applyAppiumLabel } from '../../../../services/appiumService';
 
 const Favourites = ({navigation}) => {
   const [sortedJokes, setSortedJokes] = useState<IJoke[]>([]);
@@ -85,6 +86,7 @@ const Favourites = ({navigation}) => {
         renderItem={({item}) => renderFavouriteJokeItem(item)}
         keyExtractor={item => item.id}
         ListEmptyComponent={renderEmptyFavourites}
+        {...applyAppiumLabel('Favourites-sorted-list')}
       />
       <BottomModal
         visible={sortJokesModalOpen}

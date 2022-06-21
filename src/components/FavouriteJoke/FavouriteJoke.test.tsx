@@ -25,7 +25,7 @@ const renderComponent = (Component: any) => {
 describe('FavouriteJoke', () => {
   it('Should invoke RemoveJokeFromFavourites when pressing remove button', () => {
     const {getByLabelText} = renderComponent(FavouriteJoke);
-    const removeJokeButton = getByLabelText('remove-button');
+    const removeJokeButton = getByLabelText('FavouriteJoke-remove-button');
     fireEvent.press(removeJokeButton);
     expect(mockRemoveJokeFromFavouritesFn).toHaveBeenCalledWith(mockJoke);
   });

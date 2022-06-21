@@ -14,7 +14,7 @@ const FavouriteJoke = ({joke, removeJokeFromFavourites}) => {
         <StarDisplay rating={joke.rating} />
         <TouchableOpacity
           onPress={() => removeJokeFromFavourites(joke)}
-          {...applyAppiumLabel('remove-button')}>
+          {...applyAppiumLabel('FavouriteJoke-remove-button')}>
           <Icon name="ios-heart-dislike" style={styles.heart} />
         </TouchableOpacity>
       </View>
