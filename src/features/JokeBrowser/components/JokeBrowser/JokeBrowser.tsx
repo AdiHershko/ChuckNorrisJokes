@@ -32,7 +32,7 @@ const JokeBrowser = () => {
       <TouchableOpacity
         onPress={generateJoke}
         style={styles.button}
-        {...applyAppiumLabel('next-joke-button', true)}>
+        {...applyAppiumLabel('JokeBrowser-next-joke-button', true)}>
         <Text>Next Joke</Text>
       </TouchableOpacity>
       <View style={styles.ratingContainer}>

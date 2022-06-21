@@ -11,12 +11,12 @@ const StarDisplay = ({onPress, rating, enabled, listContainerStyle}) => {
       <TouchableOpacity
         disabled={!enabled}
         onPress={() => onPress(item)}
-        {...applyAppiumLabel('star-button', true)}>
+        {...applyAppiumLabel('StarDisplay-star-button', true)}>
         <Icon
           name={item > rating || rating === 0 ? 'star-o' : 'star'}
           style={styles.star}
           key={item}
-          {...applyAppiumLabel('star-icon', false)}
+          {...applyAppiumLabel('StarDisplay-star-icon', false)}
         />
       </TouchableOpacity>
     );

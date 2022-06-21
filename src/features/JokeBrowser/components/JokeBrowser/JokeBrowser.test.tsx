@@ -37,12 +37,12 @@ describe('JokeBrowser', () => {
 
   it('Should render next joke button', async () => {
     const {findByLabelText} = renderComponent(JokeBrowser);
-    await findByLabelText('next-joke-button');
+    await findByLabelText('JokeBrowser-next-joke-button');
   });
 
   it('Should render a new joke after pressing next joke button', async () => {
     const {getByLabelText, findByText} = renderComponent(JokeBrowser);
-    const nextJokeButton = getByLabelText('next-joke-button');
+    const nextJokeButton = getByLabelText('JokeBrowser-next-joke-button');
     await act(() => fireEvent.press(nextJokeButton));
     await findByText('second_joke');
   });

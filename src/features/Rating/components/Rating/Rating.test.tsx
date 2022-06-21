@@ -54,7 +54,7 @@ describe('Rating', () => {
 
   it('Should dispatch addToFavourites and invokesetRateJokeModalOpen(false) when pressing a star', () => {
     const {getAllByLabelText} = renderComponent(Rating);
-    const stars = getAllByLabelText('star-button');
+    const stars = getAllByLabelText('StarDisplay-star-button');
     expect(stars.length).toBe(5);
     fireEvent.press(stars[2]); //rating: 3
     expect(mockUseDispatchFn).toBeCalledWith(

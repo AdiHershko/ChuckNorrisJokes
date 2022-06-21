@@ -20,14 +20,14 @@ const renderComponent = (Component: any) => {
 describe('StarDisplay', () => {
   it('Should render 5 stars', () => {
     const {getAllByLabelText} = renderComponent(StarDisplay);
-    const stars = getAllByLabelText('star-button');
+    const stars = getAllByLabelText('StarDisplay-star-button');
 
     expect(stars.length).toBe(5);
   });
 
   it('Should invoke onPress with rating when pressing a star', () => {
     const {getAllByLabelText} = renderComponent(StarDisplay);
-    const stars = getAllByLabelText('star-button');
+    const stars = getAllByLabelText('StarDisplay-star-button');
     fireEvent.press(stars[1]);
 
     expect(mockOnPressFn).toHaveBeenCalledWith(2);
@@ -37,7 +37,7 @@ describe('StarDisplay', () => {
 
   it('Should render 3 stars and 2 empty stars when rating is 3', () => {
     const {getAllByLabelText} = renderComponent(StarDisplay);
-    const stars = getAllByLabelText('star-icon');
+    const stars = getAllByLabelText('StarDisplay-star-icon');
     stars.forEach((star, index) =>
       expect(star.props.name).toBe(index < MOCK_RATING ? 'star' : 'star-o'),
     );
