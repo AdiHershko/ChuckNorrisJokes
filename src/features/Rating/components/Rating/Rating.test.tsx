@@ -3,21 +3,18 @@ import * as redux from 'react-redux';
 import {fireEvent, render} from '@testing-library/react-native';
 import Rating from './Rating';
 import {addToFavourites} from '../../../../actions/favouritesActions';
+import {ModalContext} from '../../../../context/ModalContext';
 
 jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
 
 const mockSetRateJokeModalOpenFn = jest.fn();
 
-jest.mock('react', () => {
-  const ActualReact = jest.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => ({
-      rateJokeModalOpen: true,
-      setRateJokeModalOpen: mockSetRateJokeModalOpenFn,
-    }),
-  };
-});
+const mockContextValue = {
+  rateJokeModalOpen: true,
+  setRateJokeModalOpen: mockSetRateJokeModalOpenFn,
+  sortJokesModalOpen: false,
+  setSortJokesModalOpen: jest.fn(),
+};
 
 const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
 const mockUseDispatchFn = jest.fn();
@@ -27,7 +24,11 @@ const mockJoke = {id: '123', text: 'joke', rating: 0};
 
 const renderComponent = (Component: any) => {
   const props = {joke: mockJoke};
-  return render(<Component {...props} />);
+  return render(
+    <ModalContext.Provider value={mockContextValue}>
+      <Component {...props} />
+    </ModalContext.Provider>,
+  );
 };
 
 describe('Rating', () => {

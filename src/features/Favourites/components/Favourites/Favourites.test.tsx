@@ -5,21 +5,17 @@ import * as redux from 'react-redux';
 import {IJoke} from '../../../../models/IJoke';
 import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
 import {removeFromFavourites} from '../../../../actions/favouritesActions';
+import {ModalContext} from '../../../../context/ModalContext';
 jest.useFakeTimers();
-
 
 const mockSetSortJokesModalOpenFn = jest.fn();
 
-jest.mock('react', () => {
-  const ActualReact = jest.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => ({
-      sortJokesModalOpen: true,
-      setSortJokesModalOpen: mockSetSortJokesModalOpenFn,
-    }),
-  };
-});
+const mockContextValue = {
+  sortJokesModalOpen: true,
+  setSortJokesModalOpen: mockSetSortJokesModalOpenFn,
+  rateJokeModalOpen: false,
+  setRateJokeModalOpen: jest.fn(),
+};
 
 const mockFavouriteJokes: IJoke[] = [
   {id: '1', text: 'favourite1', rating: 3},
@@ -38,7 +34,11 @@ const renderComponent = (Component: any) => {
       setOptions: jest.fn(),
     },
   };
-  return render(<Component {...props} />);
+  return render(
+    <ModalContext.Provider value={mockContextValue}>
+      <Component {...props} />
+    </ModalContext.Provider>,
+  );
 };
 
 const resetMocks = (
