@@ -2,8 +2,6 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import StarDisplay from './StarDisplay';
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'star');
-
 const mockOnPressFn = jest.fn();
 const MOCK_RATING = 3;
 const MOCK_ENABLED = true;

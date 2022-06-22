@@ -3,7 +3,6 @@ import {fireEvent, render} from '@testing-library/react-native';
 import SortJokes from './SortJokes';
 import {SORTING_TYPE} from '../../../../actions/sortActions';
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
 
 const mockCloseFn = jest.fn();
 const mockSortJokesFn = jest.fn();

@@ -1,9 +1,8 @@
 import React from 'react';
-import {act, fireEvent, render} from '@testing-library/react-native';
+import * as redux from 'react-redux';
+import {fireEvent, render} from '@testing-library/react-native';
 import JokeBrowser from './JokeBrowser';
-import {IJoke} from '../../../../models/IJoke';
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
 
 jest.mock('../../hooks/useFetchJoke', () => ({
   useFetchJoke: () => ({
@@ -19,10 +18,9 @@ jest.mock('../../hooks/useFetchJoke', () => ({
   }),
 }));
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn(),
-}));
+const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
+const mockUseDispatchFn = jest.fn();
+useDispatchSpy.mockReturnValue(mockUseDispatchFn);
 
 const renderComponent = (Component: any) => {
   const props = {};
@@ -43,7 +41,7 @@ describe('JokeBrowser', () => {
   it('Should render a new joke after pressing next joke button', async () => {
     const {getByLabelText, findByText} = renderComponent(JokeBrowser);
     const nextJokeButton = getByLabelText('JokeBrowser-next-joke-button');
-    await act(() => fireEvent.press(nextJokeButton));
+    fireEvent.press(nextJokeButton);
     await findByText('second_joke');
   });
 });

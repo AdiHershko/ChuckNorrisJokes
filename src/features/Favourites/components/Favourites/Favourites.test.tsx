@@ -6,14 +6,7 @@ import {IJoke} from '../../../../models/IJoke';
 import {changeSortingType, SORTING_TYPE} from '../../../../actions/sortActions';
 import {removeFromFavourites} from '../../../../actions/favouritesActions';
 jest.useFakeTimers();
-jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
-jest.mock('react-native-vector-icons/Ionicons', () => 'icon');
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'icon');
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn(),
-}));
 
 const mockSetSortJokesModalOpenFn = jest.fn();
 

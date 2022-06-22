@@ -3,8 +3,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import FavouriteJoke from './FavouriteJoke';
 import {IJoke} from '../../models/IJoke';
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
-jest.mock('react-native-vector-icons/Ionicons', () => 'icon');
+
 jest.useFakeTimers();
 
 const mockJoke: IJoke = {

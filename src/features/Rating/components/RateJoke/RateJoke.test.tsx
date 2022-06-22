@@ -2,7 +2,6 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import RateJoke from './RateJoke';
 
-jest.mock('react-native-vector-icons/FontAwesome', () => 'icon');
 
 const mockCloseFn = jest.fn();
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import * as redux from 'react-redux';
 import {fireEvent, render} from '@testing-library/react-native';
 import Rating from './Rating';
 import {addToFavourites} from '../../../../actions/favouritesActions';
@@ -18,12 +19,9 @@ jest.mock('react', () => {
   };
 });
 
+const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
 const mockUseDispatchFn = jest.fn();
-
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn(() => mockUseDispatchFn),
-}));
+useDispatchSpy.mockReturnValue(mockUseDispatchFn);
 
 const mockJoke = {id: '123', text: 'joke', rating: 0};
 
