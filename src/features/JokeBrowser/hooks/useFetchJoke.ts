@@ -17,7 +17,6 @@ export const useFetchJoke = () => {
         rating: 0,
       };
     } catch (err) {
-      console.log('API Error', err);
       return null;
     }
   };

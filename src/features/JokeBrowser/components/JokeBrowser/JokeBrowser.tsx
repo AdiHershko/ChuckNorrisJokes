@@ -5,6 +5,7 @@ import Joke from '../../../../components/Joke';
 import Rating from '../../../Rating/components/Rating';
 import {useFetchJoke} from '../../hooks/useFetchJoke';
 import styles from './style';
+import {applyAppiumLabel} from '../../../../services/appiumService';
 
 const JokeBrowser = () => {
   const [currentJoke, setCurrentJoke] = useState<IJoke>();
@@ -28,7 +29,10 @@ const JokeBrowser = () => {
       <ScrollView style={styles.jokeContainer}>
         <Joke text={currentJoke ? currentJoke.text : ''} animated={true} />
       </ScrollView>
-      <TouchableOpacity onPress={generateJoke} style={styles.button}>
+      <TouchableOpacity
+        onPress={generateJoke}
+        style={styles.button}
+        {...applyAppiumLabel('JokeBrowser-next-joke-button', true)}>
         <Text>Next Joke</Text>
       </TouchableOpacity>
       <View style={styles.ratingContainer}>

@@ -7,8 +7,15 @@ import styles from './style';
 import {useDispatch} from 'react-redux';
 import {addToFavourites} from '../../../../actions/favouritesActions';
 import {ModalContext} from '../../../../context/ModalContext';
+import {IJoke} from '../../../../models/IJoke';
+import { applyAppiumLabel } from '../../../../services/appiumService';
 
-const Rating = ({containerStyle = null, joke}) => {
+export interface Rating_I {
+  containerStyle: any;
+  joke: IJoke;
+}
+
+const Rating = ({containerStyle, joke}: Rating_I) => {
   const [rating, setRating] = useState<number>(0);
   const dispatch = useDispatch();
 
@@ -26,7 +33,9 @@ const Rating = ({containerStyle = null, joke}) => {
 
   return (
     <View style={containerStyle}>
-      <TouchableOpacity onPress={() => setRateJokeModalOpen(true)}>
+      <TouchableOpacity
+        onPress={() => setRateJokeModalOpen(true)}
+        {...applyAppiumLabel('Rating-rate-button', true)}>
         <View style={styles.rateButton}>
           <Icon name="heart" style={styles.heart} />
         </View>
